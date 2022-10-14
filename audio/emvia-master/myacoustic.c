@@ -14,7 +14,7 @@
 #include <time.h>
 #include "gps.h"
 
-#define DEBUG
+// #define DEBUG
 
 #ifndef DEBUG
 #define WRITELOG(str, ...) { \
@@ -75,7 +75,6 @@ static void closefiles();
 // Main entry point
 int main(int argc, char** argv)
 {
-  int rc;
   // Set up thread interrupt mechanism
   struct sigaction action = {0};
   action.sa_handler = intr_handler;
@@ -108,11 +107,7 @@ int main(int argc, char** argv)
 
   closefiles();
 
-  if(_poweroff) {
-    rc=system("shutdown -h now");
-  }
-
-  printf("Sent system: shutdown -h now - got return code of %d\n", rc);
+  if(_poweroff) system("shutdown -h now");
 
   return 0;
 }
